@@ -1,0 +1,14 @@
+{
+  "Sid": "Enable CloudTrail log decrypt permissions",
+  "Effect": "Allow",
+  "Principal": {
+    "AWS": "arn:aws:iam::account-id:user/username"
+  },
+  "Action": "kms:Decrypt",
+  "Resource": "*",
+  "Condition": {
+    "Null": {
+      "kms:EncryptionContext:aws:cloudtrail:arn": "false"
+    }
+  }
+}
