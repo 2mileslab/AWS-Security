@@ -1,0 +1,19 @@
+{
+  "Sid": "Allow CloudTrail to encrypt logs",
+  "Effect": "Allow",
+  "Principal": {
+    "Service": "cloudtrail.amazonaws.com"
+  },
+  "Action": "kms:GenerateDataKey*",
+  "Resource": "arn:aws:kms:Region:account_ID:key/key_ID",
+  "Condition": {
+    "StringLike": {
+      "kms:EncryptionContext:aws:cloudtrail:arn": [
+        "arn:aws:cloudtrail:*:account-id:trail/*"
+      ]
+    },
+    "StringEquals": {
+        "aws:SourceArn": "arn:aws:cloudtrail:region:account-id:trail/trailName"
+    }
+  }
+}
